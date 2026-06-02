@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="siteHeader">
       <Link href="/" className="brand" aria-label="VIP Connector home">
-        <Image src="/vip-connector-logo.png" alt="The VIP Connector" width={150} height={150} priority />
+        <Image src="/vip-connector-logo.webp" alt="The VIP Connector" width={150} height={150} priority />
       </Link>
 
       <nav className="navLinks" aria-label="Main navigation">
