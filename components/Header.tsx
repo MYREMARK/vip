@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/about", label: "About" },
@@ -8,10 +11,23 @@ const links = [
 ];
 
 export default function Header() {
+  const [isCompact, setIsCompact] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsCompact(window.scrollY > 28);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const logoSrc = isCompact ? "/vip-connector-logo-2.webp" : "/vip-connector-logo.webp";
+
   return (
-    <header className="siteHeader">
+    <header className={`siteHeader ${isCompact ? "siteHeaderCompact" : "siteHeaderLarge"}`}>
       <Link href="/" className="brand" aria-label="VIP Connector home">
-        <Image src="/vip-connector-logo.webp" alt="The VIP Connector" width={150} height={150} priority />
+        <Image className="brandLogo" src={logoSrc} alt="The VIP Connector" width={320} height={320} priority />
       </Link>
 
       <nav className="navLinks" aria-label="Main navigation">

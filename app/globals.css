@@ -80,6 +80,19 @@ button, input, select { font: inherit; }
   padding: 18px clamp(18px, 5vw, 76px);
   background: linear-gradient(180deg, rgba(4, 2, 0, 0.94), rgba(4, 2, 0, 0.54) 76%, transparent);
   backdrop-filter: blur(18px);
+  transition: padding 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.siteHeaderLarge {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.siteHeaderCompact {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: linear-gradient(180deg, rgba(4, 2, 0, 0.97), rgba(4, 2, 0, 0.82));
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.36);
 }
 
 .siteHeader::before {
@@ -104,11 +117,20 @@ button, input, select { font: inherit; }
   grid-column: 2;
 }
 
-.brand img {
-  width: 116px;
-  height: 116px;
+.brandLogo {
+  height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 26px rgba(216, 180, 93, 0.42));
+  transition: width 220ms ease, filter 220ms ease;
+}
+
+.siteHeaderLarge .brandLogo {
+  width: clamp(190px, 18vw, 280px);
+}
+
+.siteHeaderCompact .brandLogo {
+  width: clamp(132px, 12vw, 172px);
+  filter: drop-shadow(0 0 18px rgba(216, 180, 93, 0.34));
 }
 
 .navLinks {
@@ -508,7 +530,14 @@ select:focus {
   }
 
   .brand { grid-column: 1; justify-content: center; }
-  .brand img { width: 92px; height: 92px; }
+
+  .siteHeaderLarge .brandLogo {
+    width: min(58vw, 210px);
+  }
+
+  .siteHeaderCompact .brandLogo {
+    width: min(42vw, 142px);
+  }
 
   .navLinks {
     grid-column: 1;
