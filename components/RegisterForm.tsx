@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 
 type Props = {
   role: "player" | "game";
-  onRegistered: (totalYears: number) => void;
+  onRegistered?: (totalYears: number) => void;
 };
 
 const countries = [
@@ -104,7 +104,9 @@ export default function RegisterForm({ role, onRegistered }: Props) {
       return;
     }
 
-    onRegistered(data.metrics.totalYears);
+    if (typeof data.metrics?.totalYears === "number") {
+      onRegistered?.(data.metrics.totalYears);
+    }
     setStatus(role === "player" ? "Player registration received. Welcome to the network." : "Game registration received. Our studio team will review it.");
     form.reset();
   }

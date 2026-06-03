@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import RegisterForm from "./RegisterForm";
 
 export default function Hero() {
   const [totalYears, setTotalYears] = useState<number | null>(null);
-  const [role, setRole] = useState<"player" | "game">("player");
 
   useEffect(() => {
     fetch("/api/metrics")
@@ -31,11 +30,9 @@ export default function Hero() {
         </div>
 
         <div className="ctaRow bigCtaRow">
-          <button className={role === "player" ? "goldButton" : "ghostButton"} onClick={() => setRole("player")}>I&apos;m a player</button>
-          <button className={role === "game" ? "goldButton" : "ghostButton"} onClick={() => setRole("game")}>I&apos;m a game</button>
+          <Link className="goldButton" href="/players">I&apos;m a player</Link>
+          <Link className="ghostButton" href="/games">I&apos;m a game</Link>
         </div>
-
-        <RegisterForm role={role} onRegistered={setTotalYears} />
       </section>
     </main>
   );
