@@ -524,14 +524,22 @@ select:focus {
   }
 
   .heroContent {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
+    width: calc(100% - 28px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .innerPage {
     padding-left: 34px;
     padding-right: 34px;
+  }
+
+  .heroLead,
+  .valueCards,
+  .ctaRow,
+  .registerForm {
+    width: 100%;
+    max-width: 100%;
   }
 
   .registerForm {
