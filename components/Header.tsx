@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "/about", label: "About" },
@@ -12,9 +12,17 @@ const links = [
 
 export default function Header() {
   const [isCompact, setIsCompact] = useState(false);
+  const isCompactRef = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsCompact(window.scrollY > 28);
+    const handleScroll = () => {
+      const shouldCompact = isCompactRef.current ? window.scrollY > 18 : window.scrollY > 96;
+
+      if (shouldCompact !== isCompactRef.current) {
+        isCompactRef.current = shouldCompact;
+        setIsCompact(shouldCompact);
+      }
+    };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });

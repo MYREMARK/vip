@@ -89,8 +89,8 @@ button, input, select { font: inherit; }
 }
 
 .siteHeaderCompact {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background: linear-gradient(180deg, rgba(4, 2, 0, 0.97), rgba(4, 2, 0, 0.82));
   box-shadow: 0 16px 46px rgba(0, 0, 0, 0.36);
 }
@@ -129,7 +129,7 @@ button, input, select { font: inherit; }
 }
 
 .siteHeaderCompact .brandLogo {
-  width: clamp(132px, 12vw, 172px);
+  width: clamp(68px, 6vw, 92px);
   filter: drop-shadow(0 0 18px rgba(216, 180, 93, 0.34));
 }
 
@@ -536,7 +536,7 @@ select:focus {
   }
 
   .siteHeaderCompact .brandLogo {
-    width: min(42vw, 142px);
+    width: min(26vw, 76px);
   }
 
   .navLinks {
