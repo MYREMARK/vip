@@ -523,6 +523,12 @@ select:focus {
     padding: 44px 34px 76px;
   }
 
+  .heroContent {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .innerPage {
     padding-left: 34px;
     padding-right: 34px;
