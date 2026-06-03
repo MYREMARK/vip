@@ -498,13 +498,13 @@ select:focus {
   .gameFormGrid label:nth-child(5) { grid-column: auto; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .siteHeader {
     align-items: center;
     gap: 14px;
     grid-template-columns: 1fr;
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-left: 34px;
+    padding-right: 34px;
   }
 
   .brand { grid-column: 1; justify-content: center; }
@@ -520,17 +520,23 @@ select:focus {
   }
 
   .heroShell {
-    padding: 44px 28px 76px;
+    padding: 44px 34px 76px;
   }
 
   .innerPage {
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-left: 34px;
+    padding-right: 34px;
   }
 
   .registerForm {
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .valueCard,
+  .textCard {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .heroContent h1 { font-size: clamp(3rem, 15vw, 5rem); }
