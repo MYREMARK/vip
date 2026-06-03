@@ -481,7 +481,7 @@ select:focus {
   position: relative;
   z-index: 1;
   min-height: calc(100vh - 150px);
-  padding: clamp(260px, 24vw, 340px) clamp(18px, 5vw, 76px) clamp(62px, 8vw, 112px);
+  padding: clamp(210px, 18vw, 280px) clamp(18px, 5vw, 76px) clamp(62px, 8vw, 112px);
 }
 
 .innerPage h1 {
@@ -523,6 +523,7 @@ select:focus {
   .brand { grid-column: 1; justify-content: flex-start; }
   .navLinks { grid-column: 2; }
   .heroShell { grid-template-columns: 1fr; }
+  .innerPage { padding-top: 56px; }
   .heroPanel { min-height: 430px; }
   .valueCards, .formGrid, .playerFormGrid, .gameFormGrid { grid-template-columns: 1fr; }
   .playerFormGrid label,
@@ -574,6 +575,7 @@ select:focus {
   }
 
   .innerPage {
+    padding-top: 44px;
     padding-left: 34px;
     padding-right: 34px;
   }
