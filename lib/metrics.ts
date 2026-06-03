@@ -24,7 +24,13 @@ export async function addExperienceYears(years: number): Promise<Metrics> {
     totalYears: current.totalYears + safeYears,
     players: current.players + 1
   };
-  await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, JSON.stringify(next, null, 2), "utf8");
+
+  try {
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, JSON.stringify(next, null, 2), "utf8");
+  } catch {
+    // Serverless hosts such as Vercel do not provide persistent writable project files.
+  }
+
   return next;
 }
