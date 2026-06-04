@@ -513,7 +513,6 @@ select:focus {
 
 @media (max-width: 980px) {
   .siteHeader {
-    position: sticky;
     grid-template-columns: auto 1fr;
   }
 
@@ -565,7 +564,7 @@ select:focus {
   }
 
   .heroShell {
-    padding: 44px 34px 76px;
+    padding: 300px 34px 76px;
   }
 
   .heroContent {
@@ -575,7 +574,7 @@ select:focus {
   }
 
   .innerPage {
-    padding-top: 44px;
+    padding-top: 300px;
     padding-left: 34px;
     padding-right: 34px;
   }
@@ -601,15 +600,18 @@ select:focus {
 
   .heroContent h1 {
     max-width: 100%;
-    font-size: clamp(2.15rem, 10vw, 3.15rem);
-    line-height: 0.98;
+    font-size: clamp(1.85rem, 8.4vw, 2.55rem);
+    line-height: 1.04;
     letter-spacing: 0;
-    overflow-wrap: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
     text-wrap: balance;
   }
 
   .heroLead {
-    font-size: 1rem;
+    max-width: 31ch;
+    font-size: 0.96rem;
     line-height: 1.65;
   }
 
