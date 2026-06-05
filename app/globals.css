@@ -267,7 +267,7 @@ button, input, select { font: inherit; }
   pointer-events: none;
 }
 
-.valueCard span {
+.valueIcon {
   position: relative;
   font-size: 2rem;
   display: inline-block;
@@ -287,8 +287,8 @@ button, input, select { font: inherit; }
   align-items: center;
   justify-content: center;
   gap: 7px;
-  margin: 0 8px 0 0;
-  padding: 7px 10px;
+  margin: 0 0 18px;
+  padding: 7px 10px 7px;
   border: 1px solid rgba(255, 226, 155, 0.34);
   border-radius: 16px;
   background:
@@ -301,7 +301,7 @@ button, input, select { font: inherit; }
   font-size: 1.9rem;
   font-weight: 800;
   line-height: 1;
-  vertical-align: -0.18em;
+  vertical-align: middle;
   text-shadow:
     0 0 18px rgba(255, 220, 140, 0.48),
     0 0 38px rgba(215, 168, 61, 0.28);
@@ -362,8 +362,14 @@ button, input, select { font: inherit; }
 }
 
 .counterComma {
-  align-self: flex-end;
+  align-self: center;
   padding: 0 1px 0 0;
+}
+
+.counterValueCard {
+  display: grid;
+  justify-items: center;
+  align-content: center;
 }
 
 .ctaRow {

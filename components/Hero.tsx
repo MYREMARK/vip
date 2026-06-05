@@ -25,9 +25,9 @@ export default function Hero() {
         <p className="heroLead">Connect with real players, test new gaming experiences, and turn premium feedback into better products, stronger retention, and smarter monetization.</p>
 
         <div className="valueCards">
-          <div className="valueCard"><span>🎁</span><p>Real players get real prizes, including Amazon gift cards, for playing.</p></div>
-          <div className="valueCard"><span>✨</span><p>Newest games in the market and VIP section reviews.</p></div>
-          <div className="valueCard"><span>👑</span><p><ExperienceCounter value={totalYears} /> years of gaming experience combined.</p></div>
+          <div className="valueCard"><span className="valueIcon">🎁</span><p>Real players get real prizes, including Amazon gift cards, for playing.</p></div>
+          <div className="valueCard"><span className="valueIcon">✨</span><p>Newest games in the market and VIP section reviews.</p></div>
+          <div className="valueCard counterValueCard"><ExperienceCounter value={totalYears} /><p>years of gaming experience combined.</p></div>
         </div>
 
         <div className="ctaRow bigCtaRow">
