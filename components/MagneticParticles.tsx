@@ -24,6 +24,7 @@ export default function MagneticParticles() {
   const pointerRef = useRef({ x: 0, y: 0, active: false });
   const particlesRef = useRef<Particle[]>([]);
   const frameRef = useRef<number | null>(null);
+  const sizeRef = useRef({ width: 0, height: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,11 +32,10 @@ export default function MagneticParticles() {
 
     if (!canvas || !context) return;
 
-    const createParticles = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const density = width < 768 ? 11000 : 8500;
-      const count = Math.min(190, Math.max(70, Math.floor((width * height) / density)));
+    const createParticles = (width: number, height: number) => {
+      const density = width < 768 ? 6200 : 4200;
+      const maxCount = width < 768 ? 210 : 360;
+      const count = Math.min(maxCount, Math.max(110, Math.floor((width * height) / density)));
 
       particlesRef.current = Array.from({ length: count }, () => {
         const x = Math.random() * width;
@@ -54,15 +54,32 @@ export default function MagneticParticles() {
       });
     };
 
-    const resize = () => {
+    const resize = (rebuild = true) => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
-      canvas.width = Math.floor(window.innerWidth * pixelRatio);
-      canvas.height = Math.floor(window.innerHeight * pixelRatio);
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      sizeRef.current = { width, height };
+      canvas.width = Math.floor(width * pixelRatio);
+      canvas.height = Math.floor(height * pixelRatio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      createParticles();
+
+      if (rebuild) createParticles(width, height);
+    };
+
+    const handleResize = () => {
+      const previous = sizeRef.current;
+      const nextWidth = window.innerWidth;
+      const nextHeight = window.innerHeight;
+      const isMobile = nextWidth < 768;
+      const widthChanged = Math.abs(nextWidth - previous.width) > 8;
+      const heightChangedALot = Math.abs(nextHeight - previous.height) > 180;
+
+      if (isMobile && !widthChanged && !heightChangedALot) return;
+
+      resize(widthChanged || !isMobile);
     };
 
     const setPointer = (x: number, y: number) => {
@@ -84,7 +101,8 @@ export default function MagneticParticles() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const pointer = pointerRef.current;
-      const radius = width < 768 ? 145 : 190;
+      const radius = width < 768 ? 240 : 340;
+      const pullStrength = width < 768 ? 0.19 : 0.28;
 
       context.clearRect(0, 0, width, height);
 
@@ -101,14 +119,14 @@ export default function MagneticParticles() {
           const distance = Math.hypot(dx, dy) || 1;
 
           if (distance < radius) {
-            const pull = (1 - distance / radius) * 0.075;
+            const pull = (1 - distance / radius) * pullStrength;
             particle.vx += (dx / distance) * pull;
             particle.vy += (dy / distance) * pull;
           }
         }
 
-        particle.vx *= 0.93;
-        particle.vy *= 0.93;
+        particle.vx *= 0.9;
+        particle.vy *= 0.9;
         particle.x += particle.vx;
         particle.y += particle.vy;
 
@@ -126,7 +144,7 @@ export default function MagneticParticles() {
     resize();
     animate();
 
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("touchstart", handleTouchMove, { passive: true });
@@ -136,7 +154,7 @@ export default function MagneticParticles() {
 
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("touchstart", handleTouchMove);
