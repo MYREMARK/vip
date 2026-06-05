@@ -22,6 +22,10 @@ function getRedisConfig() {
   };
 }
 
+function isProductionHost() {
+  return process.env.VERCEL === "1";
+}
+
 async function redisCommand<T>(command: Array<string | number>): Promise<T | null> {
   const config = getRedisConfig();
 
@@ -29,6 +33,7 @@ async function redisCommand<T>(command: Array<string | number>): Promise<T | nul
 
   const response = await fetch(config.url, {
     method: "POST",
+    cache: "no-store",
     headers: {
       Authorization: `Bearer ${config.token}`,
       "Content-Type": "application/json"
@@ -37,11 +42,17 @@ async function redisCommand<T>(command: Array<string | number>): Promise<T | nul
   });
 
   if (!response.ok) {
-    throw new Error(`Metrics storage failed: ${response.status}`);
+    const errorText = await response.text();
+    throw new Error(`Metrics storage failed: ${response.status} ${errorText}`);
   }
 
-  const data = await response.json() as { result: T };
-  return data.result;
+  const data = await response.json() as { result?: T; error?: string };
+
+  if (data.error) {
+    throw new Error(`Metrics storage command failed: ${data.error}`);
+  }
+
+  return data.result ?? null;
 }
 
 function toNumber(value: unknown) {
@@ -69,7 +80,9 @@ async function writeLocalMetrics(metrics: Metrics) {
 
 export async function getMetrics(): Promise<Metrics> {
   try {
-    if (getRedisConfig()) {
+    const config = getRedisConfig();
+
+    if (config) {
       const [totalYears, players] = await Promise.all([
         redisCommand<string | number | null>(["GET", totalYearsKey]),
         redisCommand<string | number | null>(["GET", playersKey])
@@ -82,7 +95,11 @@ export async function getMetrics(): Promise<Metrics> {
     }
 
     return getLocalMetrics();
-  } catch {
+  } catch (error) {
+    if (isProductionHost() && getRedisConfig()) {
+      throw error;
+    }
+
     return getLocalMetrics();
   }
 }
@@ -91,7 +108,9 @@ export async function addExperienceYears(years: number): Promise<Metrics> {
   const safeYears = Number.isFinite(years) ? Math.max(0, Math.min(80, Math.round(years))) : 0;
 
   try {
-    if (getRedisConfig()) {
+    const config = getRedisConfig();
+
+    if (config) {
       const localMetrics = await getLocalMetrics();
 
       await Promise.all([
@@ -109,8 +128,14 @@ export async function addExperienceYears(years: number): Promise<Metrics> {
         players: toNumber(players)
       };
     }
-  } catch {
-    // Fall back to local storage if the remote counter is not configured or temporarily unavailable.
+  } catch (error) {
+    if (isProductionHost()) {
+      throw error;
+    }
+  }
+
+  if (isProductionHost()) {
+    throw new Error("Persistent counter storage is not configured. Add KV_REST_API_URL and KV_REST_API_TOKEN in Vercel.");
   }
 
   const current = await getLocalMetrics();
