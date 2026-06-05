@@ -1,5 +1,6 @@
 "use client";
 
+import ExperienceCounter from "./ExperienceCounter";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,7 +27,7 @@ export default function Hero() {
         <div className="valueCards">
           <div className="valueCard"><span>🎁</span><p>Real players get real prizes, including Amazon gift cards, for playing.</p></div>
           <div className="valueCard"><span>✨</span><p>Newest games in the market and VIP section reviews.</p></div>
-          <div className="valueCard"><span>👑</span><p><strong>{totalYears === null ? "XXX" : totalYears}</strong> years of gaming experience combined.</p></div>
+          <div className="valueCard"><span>👑</span><p><ExperienceCounter value={totalYears} /> years of gaming experience combined.</p></div>
         </div>
 
         <div className="ctaRow bigCtaRow">
