@@ -8,55 +8,83 @@ type Props = {
 };
 
 const countries = [
-  "United States",
   "United Kingdom",
-  "Canada",
-  "Australia",
-  "Israel",
-  "Germany",
-  "France",
-  "Spain",
-  "Italy",
-  "Netherlands",
+  "Malta",
+  "Gibraltar",
+  "Isle of Man",
+  "Ireland",
   "Sweden",
   "Denmark",
-  "Norway",
   "Finland",
+  "Netherlands",
+  "Germany",
+  "Spain",
+  "Italy",
+  "France",
+  "Portugal",
+  "Estonia",
+  "Latvia",
+  "Lithuania",
+  "Romania",
+  "Bulgaria",
+  "Canada",
+  "United States",
   "Brazil",
   "Mexico",
-  "India",
+  "Colombia",
+  "Peru",
+  "South Africa",
+  "Nigeria",
+  "Kenya",
+  "Australia",
+  "New Zealand",
   "Japan",
   "South Korea",
+  "India",
+  "Philippines",
+  "Israel",
   "Other"
 ];
 
-const categories = [
-  "Action",
-  "Adventure",
-  "Arcade",
-  "Battle Royale",
-  "Casino",
-  "Casual",
-  "MMORPG",
-  "Puzzle",
-  "Racing",
-  "RPG",
-  "Shooter",
-  "Simulation",
-  "Sports",
-  "Strategy",
+const igamingSectors = [
+  "Online Casino",
+  "Sports Betting",
+  "Poker",
+  "Live Casino",
+  "eSports & Gaming",
+  "iGaming Technology & Platform",
+  "Payments & FinTech",
+  "Affiliate & Marketing",
+  "Compliance & Regulation",
+  "Multiple areas",
   "Other"
 ];
 
-const gameTypes = [
-  "Mobile game",
-  "PC game",
-  "Console game",
-  "Web game",
-  "Casino game",
-  "Social casino",
-  "Indie game",
-  "AAA game",
+const operatorRoles = [
+  "CEO / Founder",
+  "Director",
+  "Head of Department",
+  "Product Manager",
+  "VIP & CRM Leader",
+  "Marketing Lead",
+  "Innovation & AI Lead",
+  "Compliance & Regulatory",
+  "Technology Lead",
+  "Commercial & Partnerships",
+  "Other"
+];
+
+const businessAreas = [
+  "Online Casino",
+  "Sportsbook",
+  "Poker",
+  "Live Casino",
+  "iGaming Platform / Software",
+  "Payments & FinTech",
+  "eSports",
+  "Affiliate & Performance Marketing",
+  "Compliance & Regulation",
+  "Multiple verticals",
   "Other"
 ];
 
@@ -78,16 +106,16 @@ export default function RegisterForm({ role, onRegistered }: Props) {
             name: formData.get("name"),
             email: formData.get("email"),
             experienceYears: Number(formData.get("experienceYears")),
-            favoriteGameCategory: formData.get("favoriteGameCategory"),
+            igamingSector: formData.get("igamingSector"),
             location: formData.get("location")
           }
         : {
             role,
             name: formData.get("name"),
             email: formData.get("email"),
-            gameName: formData.get("gameName"),
-            yearsOnline: Number(formData.get("yearsOnline")),
-            gameType: formData.get("gameType")
+            organisationName: formData.get("organisationName"),
+            jobTitle: formData.get("jobTitle"),
+            businessArea: formData.get("businessArea")
           };
 
     const response = await fetch("/api/register", {
@@ -107,75 +135,84 @@ export default function RegisterForm({ role, onRegistered }: Props) {
     if (typeof data.metrics?.totalYears === "number") {
       onRegistered?.(data.metrics.totalYears);
     }
-    setStatus(role === "player" ? "Player registration received. Welcome to the network." : "Game registration received. Our studio team will review it.");
+    setStatus(
+      role === "player"
+        ? "Registration received. We will be in touch when relevant opportunities become available."
+        : "Thank you for your interest. We will be in touch to begin the conversation."
+    );
     form.reset();
   }
 
   return (
     <form className="registerForm" onSubmit={submit} key={role}>
       <div className="formIntro">
-        <p>{role === "player" ? "Player access" : "Studio access"}</p>
-        <h2>{role === "player" ? "Join the VIP player panel" : "Register your game"}</h2>
+        <p>{role === "player" ? "Participant Registration" : "Operator Registration"}</p>
+        <h2>{role === "player" ? "Join the Intelligence Network" : "Register Your Organisation"}</h2>
       </div>
 
       {role === "player" ? (
         <div className="formGrid playerFormGrid">
           <label>
-            Name
-            <input name="name" type="text" placeholder="Your name" required />
+            Full name
+            <input name="name" type="text" placeholder="Your full name" required />
           </label>
           <label>
-            Email
+            Email address
             <input name="email" type="email" placeholder="you@email.com" required />
           </label>
           <label>
-            How many years of gaming experience do you have?
-            <input name="experienceYears" type="number" min="0" max="80" placeholder="7" required />
+            Years of iGaming experience
+            <input name="experienceYears" type="number" min="0" max="80" placeholder="e.g. 8" required />
           </label>
           <label>
-            Favorite game category
-            <select name="favoriteGameCategory" required defaultValue="">
-              <option value="" disabled>Select category</option>
-              {categories.map((category) => <option key={category} value={category}>{category}</option>)}
+            Primary iGaming sector
+            <select name="igamingSector" required defaultValue="">
+              <option value="" disabled>Select your primary area</option>
+              {igamingSectors.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </label>
           <label>
-            Location
+            Country
             <select name="location" required defaultValue="">
               <option value="" disabled>Select country</option>
-              {countries.map((country) => <option key={country} value={country}>{country}</option>)}
+              {countries.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </label>
         </div>
       ) : (
         <div className="formGrid gameFormGrid">
           <label>
-            Contact name
-            <input name="name" type="text" placeholder="Your name" required />
+            Your name
+            <input name="name" type="text" placeholder="Your full name" required />
           </label>
           <label>
-            Email
-            <input name="email" type="email" placeholder="you@email.com" required />
+            Work email
+            <input name="email" type="email" placeholder="you@company.com" required />
           </label>
           <label>
-            Name of the game
-            <input name="gameName" type="text" placeholder="Game title" required />
+            Organisation name
+            <input name="organisationName" type="text" placeholder="Your company or brand name" required />
           </label>
           <label>
-            Years online
-            <input name="yearsOnline" type="number" min="0" max="80" placeholder="3" required />
+            Your role
+            <select name="jobTitle" required defaultValue="">
+              <option value="" disabled>Select your role</option>
+              {operatorRoles.map((r) => <option key={r} value={r}>{r}</option>)}
+            </select>
           </label>
           <label>
-            Type
-            <select name="gameType" required defaultValue="">
-              <option value="" disabled>Select type</option>
-              {gameTypes.map((type) => <option key={type} value={type}>{type}</option>)}
+            Business area
+            <select name="businessArea" defaultValue="">
+              <option value="">Select business area (optional)</option>
+              {businessAreas.map((b) => <option key={b} value={b}>{b}</option>)}
             </select>
           </label>
         </div>
       )}
 
-      <button type="submit" className="goldButton submitButton" disabled={loading}>{loading ? "Sending..." : role === "player" ? "Join as a player" : "Submit game"}</button>
+      <button type="submit" className="goldButton submitButton" disabled={loading}>
+        {loading ? "Sending..." : role === "player" ? "Register as a Participant" : "Register Interest"}
+      </button>
       {status && <p className="formStatus">{status}</p>}
     </form>
   );

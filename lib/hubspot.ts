@@ -2,12 +2,14 @@ type RegistrationInput = {
   email: string;
   name: string;
   role: "player" | "game";
+  // Participant fields
   experienceYears?: number;
-  favoriteGameCategory?: string;
+  igamingSector?: string;
   location?: string;
-  gameName?: string;
-  yearsOnline?: number;
-  gameType?: string;
+  // Operator fields
+  organisationName?: string;
+  jobTitle?: string;
+  businessArea?: string;
 };
 
 function cleanProperties(properties: Record<string, string | undefined>) {
@@ -26,13 +28,15 @@ export async function sendRegistrationToHubSpot(input: RegistrationInput) {
   const properties = cleanProperties({
     email: input.email,
     firstname: input.name,
+    vip_connector_role: input.role,
+    // Participant
     gaming_experience_years: input.experienceYears === undefined ? undefined : String(input.experienceYears),
-    favorite_game_category: input.favoriteGameCategory,
+    igaming_sector: input.igamingSector,
     player_location: input.location,
-    game_name: input.gameName,
-    years_online: input.yearsOnline === undefined ? undefined : String(input.yearsOnline),
-    game_type: input.gameType,
-    vip_connector_role: input.role
+    // Operator
+    company: input.organisationName,
+    jobtitle: input.jobTitle,
+    igaming_business_area: input.businessArea
   });
 
   if (token) {

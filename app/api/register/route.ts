@@ -17,21 +17,20 @@ export async function POST(request: Request) {
 
     if (role === "player") {
       const experienceYears = Number(body.experienceYears);
-      const favoriteGameCategory = String(body.favoriteGameCategory || "").trim();
+      const igamingSector = String(body.igamingSector || "").trim();
       const location = String(body.location || "").trim();
 
-      if (!Number.isFinite(experienceYears) || !favoriteGameCategory || !location) {
-        return NextResponse.json({ error: "Missing required player fields" }, { status: 400 });
+      if (!Number.isFinite(experienceYears) || !igamingSector || !location) {
+        return NextResponse.json({ error: "Missing required participant fields" }, { status: 400 });
       }
 
       metrics = await addExperienceYears(experienceYears);
     } else {
-      const gameName = String(body.gameName || "").trim();
-      const yearsOnline = Number(body.yearsOnline);
-      const gameType = String(body.gameType || "").trim();
+      const organisationName = String(body.organisationName || "").trim();
+      const jobTitle = String(body.jobTitle || "").trim();
 
-      if (!gameName || !Number.isFinite(yearsOnline) || !gameType) {
-        return NextResponse.json({ error: "Missing required game fields" }, { status: 400 });
+      if (!organisationName || !jobTitle) {
+        return NextResponse.json({ error: "Missing required operator fields" }, { status: 400 });
       }
     }
 
