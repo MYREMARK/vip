@@ -15,7 +15,22 @@ const links = [
 export default function Header() {
   const [isCompact, setIsCompact] = useState(false);
   const isCompactRef = useRef(false);
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+
+  const syncHeaderHeight = () => {
+    if (headerRef.current) {
+      document.documentElement.style.setProperty(
+        "--header-h",
+        `${headerRef.current.offsetHeight}px`
+      );
+    }
+  };
+
+  // Sync height whenever the compact/large state changes (logo resizes after re-render)
+  useEffect(() => {
+    syncHeaderHeight();
+  }, [isCompact]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,14 +42,19 @@ export default function Header() {
     };
 
     handleScroll();
+    syncHeaderHeight();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", syncHeaderHeight, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", syncHeaderHeight);
+    };
   }, []);
 
   const logoSrc = isCompact ? "/vip-connector-logo-2.webp" : "/vip-connector-logo.webp";
 
   return (
-    <header className={`siteHeader ${isCompact ? "siteHeaderCompact" : "siteHeaderLarge"}`}>
+    <header ref={headerRef} className={`siteHeader ${isCompact ? "siteHeaderCompact" : "siteHeaderLarge"}`}>
       <Link href="/" className="brand" aria-label="The VIP Connector — home">
         <Image
           className="brandLogo"
