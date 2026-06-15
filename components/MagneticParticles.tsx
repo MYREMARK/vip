@@ -33,8 +33,8 @@ export default function MagneticParticles() {
     if (!canvas || !context) return;
 
     const createParticles = (width: number, height: number) => {
-      const density = width < 768 ? 6200 : 4200;
-      const maxCount = width < 768 ? 210 : 360;
+      const density = width < 768 ? 5400 : 4200;
+      const maxCount = width < 768 ? 260 : 360;
       const count = Math.min(maxCount, Math.max(110, Math.floor((width * height) / density)));
 
       particlesRef.current = Array.from({ length: count }, () => {
@@ -48,7 +48,7 @@ export default function MagneticParticles() {
           homeY: y,
           vx: 0,
           vy: 0,
-          size: Math.random() * 1.2 + 0.6,
+          size: width < 768 ? Math.random() * 1.6 + 0.9 : Math.random() * 1.2 + 0.6,
           color: colors[Math.floor(Math.random() * colors.length)]
         };
       });
@@ -101,8 +101,8 @@ export default function MagneticParticles() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const pointer = pointerRef.current;
-      const radius = width < 768 ? 240 : 340;
-      const pullStrength = width < 768 ? 0.19 : 0.28;
+      const radius = width < 768 ? 320 : 340;
+      const pullStrength = width < 768 ? 0.26 : 0.28;
 
       context.clearRect(0, 0, width, height);
 
@@ -134,7 +134,7 @@ export default function MagneticParticles() {
         context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         context.fillStyle = particle.color;
         context.shadowColor = particle.color;
-        context.shadowBlur = 8;
+        context.shadowBlur = width < 768 ? 11 : 8;
         context.fill();
       }
 
