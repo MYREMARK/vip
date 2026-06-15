@@ -4,17 +4,16 @@ import Link from "next/link";
 const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/academy", label: "Academy" },
-  { href: "/talents", label: "Talents" },
-  { href: "/players", label: "Players" },
-  { href: "/games", label: "Games" },
-  { href: "/members", label: "Members" }
+  { href: "/intelligence", label: "Intelligence" },
+  { href: "/talent", label: "Talent" },
+  { href: "/learning", label: "Learning" },
+  { href: "/operators", label: "Operators" }
 ];
 
 export default function Footer() {
   return (
     <footer className="siteFooter">
-      <Link href="/" className="footerBrand" aria-label="VIP Connector home">
+      <Link href="/" className="footerBrand" aria-label="The VIP Connector — home">
         <Image src="/vip-connector-logo-2.webp" alt="The VIP Connector" width={220} height={120} />
       </Link>
 
@@ -24,7 +23,7 @@ export default function Footer() {
         ))}
       </nav>
 
-      <p>© 2026 The VIP Connector. All rights reserved.</p>
+      <p>© 2025 The VIP Connector. All rights reserved.</p>
     </footer>
   );
 }

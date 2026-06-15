@@ -9,8 +9,8 @@ export default function Hero() {
 
   useEffect(() => {
     fetch("/api/metrics")
-      .then((response) => response.json())
-      .then((data) => setTotalYears(data.totalYears || 0))
+      .then((r) => r.json())
+      .then((d) => setTotalYears(d.totalYears || 0))
       .catch(() => setTotalYears(0));
   }, []);
 
@@ -20,19 +20,41 @@ export default function Hero() {
         <span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span>
       </div>
       <section className="heroContent">
-        <p className="eyebrow">Three paths. One network.</p>
-        <h1>VIP player intelligence for premium gaming studios</h1>
-        <p className="heroLead">Connect with real players, test new gaming experiences, and turn premium feedback into better products, stronger retention, and smarter monetization.</p>
+        <h1>Real Players. Real Insight. Real Intelligence.</h1>
+        <p className="heroLead">
+          A participant-driven intelligence network supporting AI testing, behavioural research, product feedback and future-focused gaming innovation.
+        </p>
 
         <div className="valueCards">
-          <div className="valueCard"><span className="valueIcon">🎁</span><p>Real players get real prizes, including Amazon gift cards, for playing.</p></div>
-          <div className="valueCard"><span className="valueIcon">✨</span><p>Newest games in the market and VIP section reviews.</p></div>
-          <div className="valueCard counterValueCard"><ExperienceCounter value={totalYears} /><p>years of gaming experience combined.</p></div>
+          <div className="valueCard">
+            <span className="valueCardTitle">Behavioural Intelligence</span>
+            <p>Real participant insight designed to help understand player behaviour, preferences and experiences.</p>
+          </div>
+          <div className="valueCard">
+            <span className="valueCardTitle">AI Testing &amp; Research</span>
+            <p>Support AI projects, product testing and future-focused research initiatives across gaming and technology.</p>
+          </div>
+          <div className="valueCard counterValueCard">
+            <span className="valueCardTitle">Collective Experience</span>
+            <ExperienceCounter value={totalYears} />
+            <p>years of gaming experience contributed by network participants.</p>
+          </div>
         </div>
 
         <div className="ctaRow bigCtaRow">
-          <Link className="goldButton" href="/players">I&apos;m a player</Link>
-          <Link className="ghostButton" href="/games">I&apos;m a game</Link>
+          <Link className="goldButton" href="/players">Participant Registration</Link>
+          <Link className="ghostButton" href="/operators">Operator Registration</Link>
+        </div>
+
+        <div className="heroSubtext">
+          <div className="heroSubtextItem">
+            <strong>For Participants</strong>
+            <p>Participate in AI testing, research projects, product feedback and future intelligence initiatives. Approved participants may receive project-based rewards and recognition opportunities.</p>
+          </div>
+          <div className="heroSubtextItem">
+            <strong>For Operators</strong>
+            <p>Access structured participant insight, testing environments and future intelligence projects designed to support product development and strategic decision-making.</p>
+          </div>
         </div>
       </section>
     </main>

@@ -50,7 +50,7 @@ export default function ExperienceCounter({ value }: Props) {
   }, [value]);
 
   if (value === null) {
-    return <span className="experienceCounter experienceCounterLoading">XXX</span>;
+    return <span className="experienceCounter experienceCounterLoading" aria-label="Loading">—</span>;
   }
 
   const characters = new Intl.NumberFormat("en-US").format(displayValue).split("");

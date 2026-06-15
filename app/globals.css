@@ -719,6 +719,244 @@ select:focus {
   .gameFormGrid label:nth-child(5) { grid-column: auto; }
 }
 
+/* ─── Value card title ─── */
+.valueCardTitle {
+  display: block;
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--softGold);
+  margin: 0 0 10px;
+  text-shadow: 0 0 14px rgba(255, 215, 128, 0.3);
+}
+
+/* ─── Active nav link ─── */
+.navActive {
+  color: var(--softGold) !important;
+}
+.navActive::after {
+  width: 100% !important;
+}
+
+/* ─── Hero CTA subtext (under buttons) ─── */
+.heroSubtext {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.heroSubtextItem {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.heroSubtextItem strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  font-family: Cinzel, Trajan Pro, Times New Roman, serif;
+}
+
+.heroSubtextItem p {
+  margin: 0;
+  color: #a89468;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  max-width: none;
+}
+
+/* ─── Inner page: long-form content sections ─── */
+.pageSection {
+  max-width: 850px;
+  margin: 52px auto 0;
+  text-align: left;
+}
+
+.pageSection h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  color: var(--paleGold);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  line-height: 1.1;
+}
+
+.pageSection > p {
+  max-width: 770px;
+  color: #d9c692;
+  font-size: clamp(0.97rem, 1.35vw, 1.12rem);
+  line-height: 1.82;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  margin: 0 0 16px;
+}
+
+/* ─── Bullet list for inner pages ─── */
+.pageList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  color: #d9c692;
+  font-size: clamp(0.97rem, 1.35vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.pageList li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.pageList li::before {
+  content: "•";
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+/* ─── Two-column section (for participant / operator cards) ─── */
+.dualSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.dualCard {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 26px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.065), rgba(255,255,255,0.012)),
+    radial-gradient(circle at 50% 0%, rgba(255, 214, 121, 0.1), transparent 52%);
+}
+
+.dualCard h3 {
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  color: var(--paleGold);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin: 0 0 12px;
+}
+
+.dualCard p {
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  color: #b9a16f;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ─── Step grid (How it works) ─── */
+.stepGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.stepItem {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px 24px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.01));
+}
+
+.stepNum {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 7px;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+}
+
+.stepItem h3 {
+  font-size: clamp(0.88rem, 1.3vw, 1.05rem);
+  color: var(--paleGold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.stepItem p {
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  color: #a89468;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ─── Page-level CTA block ─── */
+.pageCta {
+  max-width: 850px;
+  margin: 60px auto 0;
+  text-align: center;
+  padding: 42px 36px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.01)),
+    radial-gradient(circle at 50% 0%, rgba(255, 214, 121, 0.12), transparent 46%);
+}
+
+.pageCta h2 {
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  color: var(--paleGold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.pageCta > p {
+  max-width: 580px;
+  margin: 0 auto 28px;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  color: #b9a16f;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.twoCta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Tag list (disciplines, who should join) ─── */
+.tagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tagPill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+  font-size: 0.8rem;
+  color: #b9a16f;
+  background: rgba(255, 255, 255, 0.03);
+}
+
 @media (max-width: 768px) {
   .siteHeader {
     align-items: center;
@@ -748,7 +986,7 @@ select:focus {
   }
 
   .heroShell {
-    padding: 300px 34px 76px;
+    padding: 168px 34px 76px;
   }
 
   .heroContent {
@@ -758,9 +996,22 @@ select:focus {
   }
 
   .innerPage {
-    padding-top: 300px;
+    padding-top: 148px;
     padding-left: 34px;
     padding-right: 34px;
+  }
+
+  .heroSubtext {
+    grid-template-columns: 1fr;
+  }
+
+  .dualSection,
+  .stepGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pageCta {
+    padding: 30px 22px;
   }
 
   .heroLead,
