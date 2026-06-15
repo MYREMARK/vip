@@ -27,8 +27,6 @@ export default function MagneticParticles() {
   const sizeRef = useRef({ width: 0, height: 0 });
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
 
